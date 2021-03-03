@@ -31,9 +31,7 @@ services:
     working_dir: /app
     networks:
       - app-network
-    volumes: 
-      - ./auth-backend:/app
-    command: composer install
+    # command: composer install
     depends_on:
       - auth-db
     ports: 
@@ -67,9 +65,7 @@ services:
     working_dir: /app
     networks:
       - app-network
-    volumes: 
-      - ./doctor-backend:/app
-    command: composer install
+    # command: composer install
     depends_on:
       - doctor-db
       - auth-backend
@@ -104,9 +100,7 @@ services:
     working_dir: /app
     networks:
       - app-network
-    volumes: 
-      - ./user-backend:/app
-    command: composer install
+    # command: composer install
     depends_on:
       - user-db
       - auth-backend
@@ -123,10 +117,6 @@ services:
     tty: true
     restart: unless-stopped
     working_dir: /app
-    # networks:
-    #   - app-network
-    volumes: 
-      - ./user-panel:/app
     depends_on:
       - auth-backend
       - doctor-backend

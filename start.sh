@@ -1,10 +1,10 @@
-docker-compose -f ./docker-compose-dev.yml up -d --build
+docker-compose up -d --build --force-recreate
 
-docker-compose -f ./docker-compose-dev.yml exec auth-backend php artisan migrate
-docker-compose -f ./docker-compose-dev.yml exec auth-backend php artisan db:seed
+docker-compose exec auth-backend php artisan migrate
+docker-compose exec auth-backend php artisan db:seed
 
-docker-compose -f ./docker-compose-dev.yml exec doctor-backend php artisan migrate
-docker-compose -f ./docker-compose-dev.yml exec doctor-backend php artisan db:seed
+docker-compose exec doctor-backend php artisan migrate
+docker-compose exec doctor-backend php artisan db:seed
 
-docker-compose -f ./docker-compose-dev.yml exec user-backend php artisan migrate
-docker-compose -f ./docker-compose-dev.yml exec user-backend php artisan db:seed
+docker-compose exec user-backend php artisan migrate
+docker-compose exec user-backend php artisan db:seed
