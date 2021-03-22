@@ -17,7 +17,7 @@ class AuthController extends Controller
 
         $data['password']= Hash::make($data['password']);
         $data['token']=Str::random(64);
-        return User::create($data)->token;
+        return User::create($data);
     }
 
     public function login(AuthRequest $request)
@@ -28,12 +28,13 @@ class AuthController extends Controller
             return response(['message' => 'The provided credentials are incorrect.'], 401);
         }
 
-        return $user->token;
+        return $user;
     }
 
-    public function check()
+    public function check(Request $request)
     {
-        return true;
+        $user=User::where('token',$request->header('token','123'))->first();
+        return $user ?? response(['message' => 'authorize failed'], 401);
     }
 
 }
