@@ -1,0 +1,40 @@
+Users: (auth)
+    id
+    role
+    username
+    mobile
+    doctor_no/password
+    
+info: (doctor,user)
+    name
+    user_id
+    city_id
+    spec
+    license
+    address
+    tell
+    
+work_times: (doctor)
+    user_id
+    day
+    hour
+    capacity
+
+visit_times: (doctor)
+    doctor_id
+    user_id
+    date
+    hour
+    
+doctor_comments: (doctor)
+    doctor_id
+    user_id
+    comment
+    
+favorites: (user)
+    doctor_id
+    user_id
+
+city: (user)
+    id
+    name
