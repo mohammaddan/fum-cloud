@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Classes\RoleType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateWorkTimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('work_times', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->enum('role', RoleType::ROLE_TYPE);
-            $table->string('password');
-            $table->string('token');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedTinyInteger('week_day');
+            $table->unsignedTinyInteger('hour');
+            $table->unsignedTinyInteger('capacity');
             $table->timestamps();
-
-            $table->index(['token','username']);
         });
-
     }
 
     /**
@@ -34,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('work_times');
     }
 }

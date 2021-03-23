@@ -15,14 +15,16 @@ info: (doctor,user)
     tell
     
 work_times: (doctor)
-    user_id
-    day
+    id
+    doctor_id
+    week_day
     hour
     capacity
 
 visit_times: (doctor)
     doctor_id
     user_id
+    week_day
     date
     hour
     
