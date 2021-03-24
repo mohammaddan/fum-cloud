@@ -6,6 +6,7 @@ use App\Http\Classes\RoleType;
 use App\Models\User;
 use Faker\Provider\fa_IR\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -26,7 +27,7 @@ class UserFactory extends Factory
     {
         return [
             'username' => Person::firstNameMale(),
-            'password' => '123456',
+            'password' => Hash::make('123456'),
             'token' => Str::random(64),
             'role' => RoleType::DOCTOR
         ];

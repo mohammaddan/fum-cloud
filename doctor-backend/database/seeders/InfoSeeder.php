@@ -20,6 +20,7 @@ class InfoSeeder extends Seeder
         $res = Http::post($url . '/api/login',
             ['username' => 'mohammad', 'password' => '123456', 'role' => 'user']
         );
+        // dd( $res->json());
         $token = $res->json()['token'];
         $res = Http::withHeaders(['token' => $token])->get($url . '/api/doctors');
         $doctors = $res->json();

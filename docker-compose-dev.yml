@@ -1,0 +1,78 @@
+version: "3.3"
+
+services:
+
+# -----------------------   auth service  ----------------------------------
+  auth-db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: auth-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "33061:3306"
+    environment:
+      MYSQL_DATABASE: authdb
+      MYSQL_ROOT_PASSWORD: md4436
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./authdb:/var/lib/mysql/
+    networks:
+      - app-network
+
+  auth-backend:
+    build:
+      context: ./auth-backend
+      dockerfile: Dockerfile
+    container_name: auth-backend
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    networks:
+      - app-network
+    volumes: 
+      - ./auth-backend:/app
+    depends_on:
+      - auth-db
+    ports: 
+      - 8000:8000
+# -----------------------   doctor service -------------------------
+  doctor-db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: doctor-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "33062:3306"
+    environment:
+      MYSQL_DATABASE: doctordb
+      MYSQL_ROOT_PASSWORD: md4436
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./doctordb:/var/lib/mysql/
+    networks:
+      - app-network
+
+  doctor-backend:
+    build:
+      context: ./doctor-backend
+      dockerfile: Dockerfile
+    container_name: doctor-backend
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    networks:
+      - app-network
+    volumes: 
+      - ./doctor-backend:/app
+    depends_on:
+      - doctor-db
+      - auth-backend
+    ports: 
+      - 8001:8000
+networks:
+  app-network:
+    driver: bridge

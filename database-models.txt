@@ -22,9 +22,9 @@ work_times: (doctor)
     capacity
 
 visit_times: (doctor)
+    work_time_id
     doctor_id
     user_id
-    week_day
     date
     hour
     
