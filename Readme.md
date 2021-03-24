@@ -1,10 +1,11 @@
 # How to run project
 ### *By run **start.sh**, it will start docker-compose-dev.yml file and then migrate databases, then create fake data.*
-one of fake user is :
+One of fake user is :
 * username : mohammad
 * password : 123456
 * role : user
-
+## Start in browser by http://localhost:4000
+---
 ## This project is for practice micro-service model programming
 <div style="color:rgb(255,55,255)">backend: Laravel</div>
 <div style="color:rgb(50,255,155)">frontend : Vuejs</div>

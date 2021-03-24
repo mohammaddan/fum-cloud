@@ -73,6 +73,25 @@ services:
       - auth-backend
     ports: 
       - 8001:8000
+# ------------------------  user panel -----------------------
+  user-panel:
+    build:
+      context: ./user-panel
+      dockerfile: Dockerfile
+    container_name: user-panel
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    # networks:
+    #   - app-network
+    volumes: 
+      - ./user-panel:/app
+    depends_on:
+      - auth-backend
+      - doctor-backend
+    ports: 
+      - 4000:4000
+# --------------------------------------------------------------
 networks:
   app-network:
     driver: bridge
