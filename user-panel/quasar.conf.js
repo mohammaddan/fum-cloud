@@ -44,7 +44,9 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env:{
-        API: 'http://localhost:8000/api',
+        AUTH_API: 'http://localhost:8000/api',
+        DOCTOR_API: 'http://localhost:8001/api',
+        USER_API: 'http://localhost:8002/api',
       },
       // transpile: false,
 

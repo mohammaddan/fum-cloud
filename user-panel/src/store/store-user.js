@@ -7,8 +7,12 @@ const state={
 const mutations={
   login(state,payload){
     state.loggedIn=true
-    localStorage.setItem('token', payload["token"])
-    state.user=payload
+    localStorage.setItem('token', payload.user.token)
+    state.user=payload.user
+    state.info=payload.info
+  },
+  updateInfo(state,info){
+    state.info=info
   }
 }
 
@@ -16,6 +20,9 @@ const actions={
   login({commit}, payload) {
     commit('login', payload)
   },
+  updateInfo({commit},info){
+    commit('updateInfo', info)
+  }
 }
 
 const getters={

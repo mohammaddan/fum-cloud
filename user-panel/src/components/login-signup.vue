@@ -51,12 +51,23 @@ export default {
   methods:{
     ...mapActions('user',['login']),
     requestLogin(){
-      axios.post(process.env.API+'/login',{
+      axios.post(process.env.AUTH_API+'/login',{
         username:this.username,
         password:this.password,
         role:'user'
       }).then(res=>{
-        this.login(res.data)
+        if(!res.data.hasOwnProperty('token')){
+          this.$q.notify({message:'نام کاربری ویا رمز عبور اشتباه است'})
+          return
+        }
+        this.$emit('close')
+        axios.get(process.env.USER_API+'/me',{headers:{'token':res.data.token}}).then(res2=>{
+          this.login({
+            user:res.data,
+            info:res2.data,
+          })
+        })
+        console.log('%cLogged in','style:font-weight:bold;color:green')
       })
     }
   }

@@ -29,7 +29,8 @@ class UserFactory extends Factory
             'username' => Person::firstNameMale(),
             'password' => Hash::make('123456'),
             'token' => Str::random(64),
-            'role' => RoleType::DOCTOR
+            'role' => RoleType::DOCTOR,
+            'doctor_no' => strval(random_int(1000000,9999999))
         ];
     }
 

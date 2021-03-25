@@ -95,6 +95,86 @@
 						"description": "query can each of name,city_id,spec-license\nheader must has token field"
 					},
 					"response": []
+				},
+				{
+					"name": "doctor search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "search doctor by name,spec,license or doctor_no"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8002/api/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"me"
+							]
+						},
+						"description": "get user info"
+					},
+					"response": []
+				},
+				{
+					"name": "update user info",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"mohammad\",\n    \"tell\":\"09155096967\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/info/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"info",
+								"52"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
