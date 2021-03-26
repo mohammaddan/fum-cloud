@@ -23,6 +23,7 @@ class InfoSeeder extends Seeder
         // dd( $res->json());
         $token = $res->json()['token'];
         $res = Http::withHeaders(['token' => $token])->get($url . '/api/doctors');
+
         $doctors = $res->json();
         foreach ($doctors as $doctor) {
             Info::create([

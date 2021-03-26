@@ -28,7 +28,7 @@ visit_times: (doctor)
     date
     hour
     
-doctor_comments: (doctor)
+doctor_comments: (user)
     doctor_id
     user_id
     comment

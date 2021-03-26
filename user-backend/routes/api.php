@@ -3,7 +3,6 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\InfoController;
 use App\Http\Middleware\AuthCheck;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(AuthCheck::class)->group(function (){
