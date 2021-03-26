@@ -65,7 +65,7 @@
 			"name": "doctors",
 			"item": [
 				{
-					"name": "doctor",
+					"name": "doctors",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -105,6 +105,61 @@
 							"raw": ""
 						},
 						"description": "search doctor by name,spec,license or doctor_no"
+					},
+					"response": []
+				},
+				{
+					"name": "get doctor and workTimes by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8001/api/doctor/23",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"doctor",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get visit time",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"doctor_id\":23,\n    \"user_id\":1,\n    \"work_time_id\":10,\n    \"plusDay\":3,\n    \"hour\":10\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/api/visitTime",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"api",
+								"visitTime"
+							]
+						}
 					},
 					"response": []
 				}
@@ -285,6 +340,68 @@
 								"api",
 								"favorite",
 								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment for doctor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\":\"دکتر خوبی بود\",\n    \"doctor_id\":23\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get doctor comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8002/api/23/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"23",
+								"comment"
 							]
 						}
 					},

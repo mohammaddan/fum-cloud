@@ -10,4 +10,7 @@ class Info extends Model
     use HasFactory;
     protected $guarded=[];
 
+    public function workTimes(){
+        return $this->hasMany(WorkTime::class,'doctor_id');
+    }
 }

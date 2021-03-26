@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\DoctorCommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\InfoController;
 use App\Http\Middleware\AuthCheck;
@@ -15,3 +16,5 @@ Route::get('/city',[CityController::class,'index']);
 Route::middleware(AuthCheck::class)->delete('/favorite/{doctor_id}',[FavoriteController::class,'remove']);
 Route::middleware(AuthCheck::class)->post('/favorite',[FavoriteController::class,'attach']);
 Route::middleware(AuthCheck::class)->get('/favorite',[FavoriteController::class,'index']);
+Route::middleware(AuthCheck::class)->post('/comment',[DoctorCommentController::class,'store']);
+Route::middleware(AuthCheck::class)->get('/{doctor_id}/comment',[DoctorCommentController::class,'index']);

@@ -21,6 +21,10 @@
         <span class="text-bold">آدرس</span> {{doctor.address}}
       </div>
     </q-card-section>
+    <q-card-section class="text-right">
+        <q-btn v-if="loggedIn" dense color="secondary"
+               label="دریافت ویزیت" :to="'/doctor/'+doctor.id"/>
+    </q-card-section>
   </q-card>
 </template>
 

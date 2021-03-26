@@ -25,4 +25,8 @@ class InfoController extends Controller
             }
         })->get();
     }
+
+    public function show($doctor_id){
+        return Info::with('workTimes:id,doctor_id,capacity,hour,week_day')->where('id',$doctor_id)->first();;
+    }
 }
