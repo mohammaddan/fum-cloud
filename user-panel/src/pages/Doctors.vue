@@ -18,26 +18,28 @@
   </div>
   <div v-for="(doctor,index) in doctors" :key="index"
        class="col-sm-6 col-md-4 col-lg-3 q-pa-sm">
-  <q-card class="bg-white" bordered>
-    <q-card-section class="text-subtitle2 text-bold">
-      {{doctor.name}}
-      <q-btn v-if="loggedIn" class="absolute-top-right" flat icon="favorite_border" color="red"/>
-    </q-card-section>
-    <q-card-section class="q-pt-xs text-caption">
-      <div>
-        <span class="text-bold">تخصص</span> {{doctor.spec}}
-      </div>
-      <div>
-        <span class="text-bold">مدرک</span> {{doctor.license}}
-      </div>
-      <div>
-        <span class="text-bold">تلفن</span> {{doctor.tell}}
-      </div>
-      <div>
-        <span class="text-bold">آدرس</span> {{doctor.address}}
-      </div>
-    </q-card-section>
-  </q-card>
+    <doctor-card :doctor="doctor" :is-add="true"/>
+<!--  <q-card class="bg-white" bordered>-->
+<!--    <q-card-section class="text-subtitle2 text-bold">-->
+<!--      {{doctor.name}}-->
+<!--      <q-btn v-if="loggedIn" class="absolute-top-right"-->
+<!--             flat icon="favorite_border" color="red" @click="addToFavorite(doctor['user_id'])"/>-->
+<!--    </q-card-section>-->
+<!--    <q-card-section class="q-pt-xs text-caption">-->
+<!--      <div>-->
+<!--        <span class="text-bold">تخصص</span> {{doctor.spec}}-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span class="text-bold">مدرک</span> {{doctor.license}}-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span class="text-bold">تلفن</span> {{doctor.tell}}-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span class="text-bold">آدرس</span> {{doctor.address}}-->
+<!--      </div>-->
+<!--    </q-card-section>-->
+<!--  </q-card>-->
   </div>
 </div>
 </template>
@@ -61,8 +63,11 @@ name: "Doctors",
   mounted() {
     this.get_request()
   },
+  components:{
+    'doctor-card':()=>import('src/components/doctor-card')
+  },
   computed:{
-    ...mapGetters('user',['loggedIn'])
+    ...mapGetters('user',['loggedIn','user'])
   },
   methods:{
     get_request(){
@@ -82,7 +87,6 @@ name: "Doctors",
         })
         return
       }
-
       update(() => {
         axios.get(process.env.USER_API+'/city?src='+val).then(res=>{
           this.cities=res.data.map(c=>{

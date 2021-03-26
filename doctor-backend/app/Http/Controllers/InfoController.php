@@ -19,6 +19,10 @@ class InfoController extends Controller
                     ->orWhere('spec', $request['src'])
                     ->orWhere('license', $request['src']);
             }
+            if($request->has('ids')){
+                if($request['ids']=='') return $q->where('id',0);
+                $q->whereIn('user_id',explode(',',$request['ids']));
+            }
         })->get();
     }
 }

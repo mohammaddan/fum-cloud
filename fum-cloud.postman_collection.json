@@ -71,7 +71,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "ZligIQXFuf26QRBeCdPyqnCOQ6BtLUiKyFgAWidMAp0Wf56leq0AU9HEZIL6z5gi",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
 								"type": "text"
 							}
 						],
@@ -171,6 +171,120 @@
 								"api",
 								"info",
 								"52"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/api/city?src=مش",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"city"
+							],
+							"query": [
+								{
+									"key": "src",
+									"value": "مش"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add doctor to favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\" : 1,\n    \"doctor_id\" :23\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8002/api/favorite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get favorite doctors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8002/api/favorite",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove doctor from favorite",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "QCDua10JEYcJMfT3QlympjaAmcGUsgPANrNzEJcc9WKjhqJmxHFcTQaWLnwLZ0OA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8002/api/favorite/23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8002",
+							"path": [
+								"api",
+								"favorite",
+								"23"
 							]
 						}
 					},
