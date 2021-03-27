@@ -7,9 +7,21 @@ One of fake user is :
 ## Start in browser by http://localhost:4000
 ---
 ## This project is for practice micro-service model programming
-<div style="color:rgb(255,55,255)">backend: Laravel</div>
-<div style="color:rgb(50,255,155)">frontend : Vuejs</div>
-<div style="color:rgb(50,150,255)">container-service : docker</div>
+![](https://laravel.com/img/favicon/favicon-32x32.png)
+```php
+$backend = 'Laravel';
+```
+![](https://vuejs.org/images/icons/favicon-32x32.png)
+```js
+let fronend = 'Vuejs';
+```
+![](https://www.docker.com/favicon.ico)
+```bash
+$container_service = 'docker'
+```
+- <div class="text-purple"> backend: Laravel</div>
+- <div class="text-green">frontend : Vuejs</div>
+- <div class="text-blue">container-service : docker</div>
 
 ---
 ## Class Professor:
@@ -38,9 +50,9 @@ One of fake user is :
     * info
     * work_times
     * visit_times
-    * doctor_comments
 * ### user service
     * info
+    * doctor_comments
     * favorites
     * city
 
