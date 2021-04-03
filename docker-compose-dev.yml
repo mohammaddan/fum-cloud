@@ -27,12 +27,13 @@ services:
       dockerfile: Dockerfile
     container_name: auth-backend
     tty: true
-    restart: unless-stopped
+    # restart: unless-stopped
     working_dir: /app
     networks:
       - app-network
     volumes: 
       - ./auth-backend:/app
+    # command: composer install
     depends_on:
       - auth-db
     ports: 
@@ -62,12 +63,13 @@ services:
       dockerfile: Dockerfile
     container_name: doctor-backend
     tty: true
-    restart: unless-stopped
+    # restart: unless-stopped
     working_dir: /app
     networks:
       - app-network
     volumes: 
       - ./doctor-backend:/app
+    # command: composer install
     depends_on:
       - doctor-db
       - auth-backend
@@ -98,12 +100,13 @@ services:
       dockerfile: Dockerfile
     container_name: user-backend
     tty: true
-    restart: unless-stopped
+    # restart: unless-stopped
     working_dir: /app
     networks:
       - app-network
     volumes: 
       - ./user-backend:/app
+    # command: composer install
     depends_on:
       - user-db
       - auth-backend
@@ -118,7 +121,7 @@ services:
       dockerfile: Dockerfile
     container_name: user-panel
     tty: true
-    restart: unless-stopped
+    # restart: unless-stopped
     working_dir: /app
     # networks:
     #   - app-network
