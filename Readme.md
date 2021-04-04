@@ -55,7 +55,8 @@ $container_service = 'docker'
     * doctor_comments
     * favorites
     * city
-
+# Architectural :
+![login](https://api.programai.ir/storage/pubmd/Architectural.png)
 # Some screen shots :
 ![login](https://api.programai.ir/storage/pubmd/login.png)
 ![profile](https://api.programai.ir/storage/pubmd/profile.png)

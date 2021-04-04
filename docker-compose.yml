@@ -1,26 +1,22 @@
-version: "3.3"
-
+version: '3.3'
 services:
-
-# -----------------------   auth service  ----------------------------------
   auth-db:
-    image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
     container_name: auth-db
     restart: unless-stopped
     tty: true
     ports:
-      - "33061:3306"
+      - '33061:3306'
     environment:
       MYSQL_DATABASE: authdb
       MYSQL_ROOT_PASSWORD: md4436
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./authdb:/var/lib/mysql/
+      - './authdb:/var/lib/mysql/'
     networks:
       - app-network
-
   auth-backend:
     build:
       context: ./auth-backend
@@ -31,30 +27,27 @@ services:
     working_dir: /app
     networks:
       - app-network
-    # command: composer install
     depends_on:
       - auth-db
-    ports: 
-      - 8000:8000
-# -----------------------   doctor service -------------------------
+    ports:
+      - '8000:8000'
   doctor-db:
-    image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
     container_name: doctor-db
     restart: unless-stopped
     tty: true
     ports:
-      - "33062:3306"
+      - '33062:3306'
     environment:
       MYSQL_DATABASE: doctordb
       MYSQL_ROOT_PASSWORD: md4436
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./doctordb:/var/lib/mysql/
+      - './doctordb:/var/lib/mysql/'
     networks:
       - app-network
-
   doctor-backend:
     build:
       context: ./doctor-backend
@@ -65,31 +58,28 @@ services:
     working_dir: /app
     networks:
       - app-network
-    # command: composer install
     depends_on:
       - doctor-db
       - auth-backend
-    ports: 
-      - 8001:8000
-# -----------------------   user service -------------------------
+    ports:
+      - '8001:8000'
   user-db:
-    image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
     container_name: user-db
     restart: unless-stopped
     tty: true
     ports:
-      - "33063:3306"
+      - '33063:3306'
     environment:
       MYSQL_DATABASE: userdb
       MYSQL_ROOT_PASSWORD: md4436
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
-      - ./userdb:/var/lib/mysql/
+      - './userdb:/var/lib/mysql/'
     networks:
       - app-network
-
   user-backend:
     build:
       context: ./user-backend
@@ -100,15 +90,11 @@ services:
     working_dir: /app
     networks:
       - app-network
-    # command: composer install
     depends_on:
       - user-db
       - auth-backend
-    ports: 
-      - 8002:8000
-
-
-# ------------------------  user panel -----------------------
+    ports:
+      - '8002:8000'
   user-panel:
     build:
       context: ./user-panel
@@ -121,10 +107,9 @@ services:
       - auth-backend
       - doctor-backend
       - user-backend
-    ports: 
-      - 4000:4000
-      - 8080:8080
-# --------------------------------------------------------------
+    ports:
+      - '4000:4000'
+      - '8080:8080'
 networks:
   app-network:
     driver: bridge
