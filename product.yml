@@ -143,8 +143,7 @@ services:
       - doctor-backend
       - user-backend
     ports:
-      - '4000:4000'
-      - '8080:8080'
+      - '80:4000'
     deploy:
       mode: replicated
       replicas: 2
