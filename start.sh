@@ -1,4 +1,4 @@
-docker-compose up -d --build --force-recreate
+docker-compose up -d --build
 
 docker-compose exec auth-backend php artisan migrate
 docker-compose exec auth-backend php artisan db:seed

@@ -14,8 +14,7 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
-
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
@@ -27,8 +26,9 @@ return [
 
     'exposed_headers' => [],
 
-    'max_age' => 0,
+    'max_age' => 12000,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
+    'allow_credentials' => true,
 
 ];
