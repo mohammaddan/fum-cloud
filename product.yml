@@ -1,0 +1,158 @@
+version: '3.3'
+services:
+  auth-db:
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
+    container_name: auth-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '33061:3306'
+    environment:
+      MYSQL_DATABASE: authdb
+      MYSQL_ROOT_PASSWORD: md4436
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - './authdb:/var/lib/mysql/'
+    networks:
+      - app-network
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  auth-backend:
+    build:
+      context: ./auth-backend
+      dockerfile: Dockerfile
+    container_name: auth-backend
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    networks:
+      - app-network
+    depends_on:
+      - auth-db
+    ports:
+      - '8000:8000'
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=AUTH]
+      placement:
+        constraints: [node.role == worker]
+
+  doctor-db:
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
+    container_name: doctor-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '33062:3306'
+    environment:
+      MYSQL_DATABASE: doctordb
+      MYSQL_ROOT_PASSWORD: md4436
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - './doctordb:/var/lib/mysql/'
+    networks:
+      - app-network
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  doctor-backend:
+    build:
+      context: ./doctor-backend
+      dockerfile: Dockerfile
+    container_name: doctor-backend
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    networks:
+      - app-network
+    depends_on:
+      - doctor-db
+      - auth-backend
+    ports:
+      - '8001:8000'
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=DOCTOR]
+      placement:
+        constraints: [node.role == worker]
+
+  user-db:
+    image: 'mysql:latest'
+    command: '--default-authentication-plugin=mysql_native_password'
+    container_name: user-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '33063:3306'
+    environment:
+      MYSQL_DATABASE: userdb
+      MYSQL_ROOT_PASSWORD: md4436
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - './userdb:/var/lib/mysql/'
+    networks:
+      - app-network
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+
+  user-backend:
+    build:
+      context: ./user-backend
+      dockerfile: Dockerfile
+    container_name: user-backend
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    networks:
+      - app-network
+    depends_on:
+      - user-db
+      - auth-backend
+    ports:
+      - '8002:8000'
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=USER]
+      placement:
+        constraints: [node.role == worker]
+
+
+  user-panel:
+    build:
+      context: ./user-panel
+      dockerfile: Dockerfile
+    container_name: user-panel
+    tty: true
+    restart: unless-stopped
+    working_dir: /app
+    depends_on:
+      - auth-backend
+      - doctor-backend
+      - user-backend
+    ports:
+      - '4000:4000'
+      - '8080:8080'
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=FRONT]
+      placement:
+        constraints: [node.role == worker]
+
+
+networks:
+  app-network:
+    driver: bridge
