@@ -21,7 +21,7 @@ services:
         constraints: [node.role == manager]
 
   auth-backend:
-    image: auth-backend:latest
+    image: localhost:5000/auth-backend:latest
     tty: true
     restart: always
     working_dir: /app
@@ -59,7 +59,7 @@ services:
         constraints: [node.role == manager]
 
   doctor-backend:
-    image: doctor-backend:latest
+    image: localhost:5000/doctor-backend:latest
     tty: true
     restart: always
     working_dir: /app
@@ -98,7 +98,7 @@ services:
 
 
   user-backend:
-    image: user-backend:latest
+    image: localhost:5000/user-backend:latest
     tty: true
     restart: always
     working_dir: /app
@@ -117,12 +117,12 @@ services:
 
 
   user-panel:
-    image: user-panel:latest
+    image: localhost:5000/user-panel:latest
     tty: true
     restart: always
     working_dir: /app
     ports:
-      - '80:4000'
+      - '4000:4000'
     deploy:
       mode: replicated
       replicas: 2
